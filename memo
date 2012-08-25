@@ -2,3 +2,9 @@
 
 まずは gismu をランダムに表示する。
 lojban_en.xml から gismu のみを取り出す .hs を書こう。
+
+すべての valsi がなくなったら、minimal をセットする。
+minimal と同じ数の valsi のみを filter する。
+
+I know が押されたら、point を +1 して、それをリストから外し、
+valsi の数を -1 する。
