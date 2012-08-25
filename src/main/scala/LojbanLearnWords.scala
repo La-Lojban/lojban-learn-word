@@ -38,6 +38,9 @@ class LojbanLearnWords extends Activity with TypedActivity {
 
 	var minimal = 0
 
+	lazy val scoreview = findView(TR.score)
+	var score = 0
+
 	override def onCreate(bundle: Bundle) {
 		super.onCreate(bundle)
 		setContentView(R.layout.main)
@@ -46,13 +49,16 @@ class LojbanLearnWords extends Activity with TypedActivity {
 		minimal = sharedpreferences.getInt("minimal", 0)
 		valsi = valsi filter { v =>
 			val w = (v \ "@word")(0).text
-			sharedpreferences.getInt(w, 0) == minimal
+			val p = sharedpreferences.getInt(w, 0)
+			score += p
+			p == minimal
 		}
 
 		n = valsi.length
 		Log.d("LojbanLearnWords", "valsi not learned is " + n)
 
 		showValsi
+		scoreview.setText("" + score)
 
 		know setOnClickListener new OnClickListener() {
 			def onClick(v: View) {
@@ -69,6 +75,8 @@ class LojbanLearnWords extends Activity with TypedActivity {
 					editor.putInt("minimal", minimal)
 				}
 				showValsi
+				score += 1
+				scoreview.setText("" + score)
 				editor.commit
 				Log.d("LojbanLearnWords", "valsi not learned is " + n)
 				val nd = valsi.length

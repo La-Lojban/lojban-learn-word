@@ -5,11 +5,24 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<TextView
-		android:id="@+id/valsi"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		/>
+		android:gravity="right">
+		<TextView
+			android:id="@+id/valsi"
+			android:layout_width="0dip"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			/>
+		<TextView
+			android:id="@+id/score"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="hogehoge"
+			/>
+	</LinearLayout>
 
 	<TextView
 		android:id="@+id/textview"
