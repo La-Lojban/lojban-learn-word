@@ -9,7 +9,7 @@ object General {
     version := "0.1",
     versionCode := 0,
     scalaVersion := "2.9.1",
-    platformName in Android := "android-6"
+    platformName in Android := "android-16"
   )
 
   val proguardSettings = Seq (
