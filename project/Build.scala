@@ -7,7 +7,7 @@ object General {
   val settings = Defaults.defaultSettings ++ Seq (
     name := "Lojban Learn Words",
     version := "0.1",
-    versionCode := 0,
+    versionCode := 1,
     scalaVersion := "2.9.1",
     platformName in Android := "android-16"
   )
@@ -23,7 +23,7 @@ object General {
     proguardSettings ++
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++ Seq (
-      keyalias in Android := "change-me",
+      keyalias in Android := "yoshikuni",
       libraryDependencies += "org.scalatest" %% "scalatest" % "1.8.RC1" % "test"
     )
 }
