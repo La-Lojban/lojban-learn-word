@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="Settings">
+<ListPreference
+	android:key="orientation"
+	android:title="Orientation"
+	android:summary="Set orientation"
+	android:dialogTitle="Set orientation"
+	android:entries="@array/orientation"
+	android:entryValues="@array/orientationvalues"
+	/>
+</PreferenceCategory>
+</PreferenceScreen>

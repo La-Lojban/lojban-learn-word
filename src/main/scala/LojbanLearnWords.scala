@@ -8,15 +8,19 @@ import _root_.android.app.Activity
 import _root_.android.os.Bundle
 
 import _root_.android.text.Html
-import _root_.android.view.View
+import _root_.android.view.{View, Menu, MenuItem}
 import _root_.android.view.View.OnClickListener
 
-import _root_.android.content.Context
-import _root_.android.content.SharedPreferences
+import _root_.android.content.{Context, SharedPreferences, Intent}
+import _root_.android.content.pm.ActivityInfo
 
 import _root_.android.util.Log
 
+import _root_.android.preference.PreferenceManager
+
 class LojbanLearnWords extends Activity with TypedActivity {
+
+	lazy val sp = PreferenceManager getDefaultSharedPreferences this
 
 	lazy val next = findView(TR.next)
 	lazy val know = findView(TR.i_know)
@@ -101,7 +105,35 @@ class LojbanLearnWords extends Activity with TypedActivity {
 		textview.setText(Html.fromHtml(line._2))
 	}
 
+	override def onResume {
+		super.onResume
+		if (sp.contains("orientation")) {
+			sp.getString("orientation", "auto") match {
+			case "auto" => setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+			case "portrait" => setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+			case "landscape" => setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+			}
+		}
+	}
 
+	override def onCreateOptionsMenu(menu: Menu): Boolean = {
+		menu.add(Menu.NONE, 0, 0, "settings")
+		return super.onCreateOptionsMenu(menu)
+	}
+
+	override def onOptionsItemSelected(item: MenuItem): Boolean = {
+		item.getItemId() match {
+		case 0 =>
+			Log.d("LojbanLearnWords", "select menu item 'setting'")
+			val intent = new Intent(this, classOf[Preference])
+			Log.d("LojbanLearnWords", "intent is " + intent)
+			startActivity(intent)
+		}
+		true
+	}
 
 	var mr = new MyRegex
 
