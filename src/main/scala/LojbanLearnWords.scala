@@ -137,15 +137,21 @@ class LojbanLearnWords extends Activity with TypedActivity {
 
 	var mr = new MyRegex
 
+	def ampltgt(src: String): String =
+		src.replaceAll("RefEntity \"lt\"", "&lt;").
+			replaceAll("RefEntity \"gt\"", "&gt;").
+			replaceAll("RefEntity \"amp\"", "&amp;")
+
 	def makeValsiString(valsi: Node): (String, String) = {
 		var rafsiStr = ""
 		for (r <- valsi \ "rafsi") rafsiStr += "<BR/><B>rafsi</B>: " + r.text
-		return ((valsi \ "@word").text, "<B>type</B>: " +
+		return ((valsi \ "@word").text,
+			ampltgt("<B>type</B>: " +
 			valsi \ "@type" + rafsiStr +
 			"<BR/><B>definition</B>: " +
 			mr.rep((valsi \ "definition").text) +
 			"<BR/><B>notes</B>: " +
 			mr.rep((valsi \ "notes").text.filterNot
-				{c => '{'.equals(c) || '}'.equals(c)}))
+				{c => '{'.equals(c) || '}'.equals(c)})))
 	}
 }
